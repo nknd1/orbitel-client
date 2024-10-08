@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Интернет Провайдер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #00abfa; /* Акцентный цвет */
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        .tariff-list, .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Пробел между карточками */
+        }
+        .tariff-item, .service-item {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1 1 calc(33% - 20px); /* Три карточки в ряд */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .tariff-item:hover, .service-item:hover {
+            transform: translateY(-5px);
+        }
+        button {
+            background-color: #00abfa; /* Акцентный цвет */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #008fcf; /* Темнее на наведение */
+        }
+
+        .contracts {
+          margin-top: 30px;
+      }
+      .contract-item {
+          background-color: #f9f9f9;
+          border-radius: 5px;
+          padding: 10px;
+          margin-bottom: 10px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Личный кабинет</h1>
+    <nav>
+        <a href="#">Главная</a>
+        <a href="#">Тарифы</a>
+        <a href="#">Услуги</a>
+        <a href="#">Поддержка</a>
+        <a href="#">Выход</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Добро пожаловать, [Имя пользователя]!</h2>
+        <p>Здесь вы можете управлять своими тарифами и услугами.</p>
+    </div>
+
+    <div class="contracts">
+      <h3>Ваши договора</h3>
+      <div class="contract-item">
+          <strong>Договор №1</strong><br>
+          <p>Тариф: Базовый</p>
+          <p>Статус: Активен</p>
+      </div>
+      <div class="contract-item">
+          <strong>Договор №2</strong><br>
+          <p>Тариф: Стандартный</p>
+          <p>Статус: Активен</p>
+      </div>
+      <div class="contract-item">
+          <strong>Договор №3</strong><br>
+          <p>Тариф: Премиум</p>
+          <p>Статус: Неактивен</p>
+      </div>
+  </div>
+
+    <div class="card">
+        <h2>Ваши тарифы</h2>
+        <div class="tariff-list">
+            <div class="tariff-item">
+                <h3>Тариф "Базовый"</h3>
+                <p>Цена: 500 руб./мес.</p>
+                <p>Скорость: 100 Мбит/с</p>
+                <button>Изменить тариф</button>
+            </div>
+            <div class="tariff-item">
+                <h3>Тариф "Стандартный"</h3>
+                <p>Цена: 800 руб./мес.</p>
+                <p>Скорость: 300 Мбит/с</p>
+                <button>Изменить тариф</button>
+            </div>
+            <div class="tariff-item">
+                <h3>Тариф "Премиум"</h3>
+                <p>Цена: 1200 руб./мес.</p>
+                <p>Скорость: 600 Мбит/с</p>
+                <button>Изменить тариф</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="card">
+        <h2>Доступные услуги</h2>
+        <div class="service-list">
+            <div class="service-item">
+                <h3>Дополнительный IP-адрес</h3>
+                <p>Цена: 200 руб./мес.</p>
+                <button>Подключить</button>
+            </div>
+            <div class="service-item">
+                <h3>Антивирусная защита</h3>
+                <p>Цена: 150 руб./мес.</p>
+                <button>Подключить</button>
+            </div>
+            <div class="service-item">
+                <h3>Резервное копирование данных</h3>
+                <p>Цена: 300 руб./мес.</p>
+                <button>Подключить</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

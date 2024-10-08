@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тарифы</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background-color: #f0f0f0;
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between; /* Выравнивание кнопки и текста по краям */
+      align-items: center; /* Вертикальное выравнивание по центру */
+    }
+    .tariff-info {
+      flex-grow: 1; /* Чтобы информация о тарифе занимала оставшееся пространство */
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-left: 20px;
+      border-radius: 20px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+ 
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+ <style>
+  .loader {
+    width: 50px;
+    aspect-ratio: 1;
+    box-shadow: 0 0 0 3px #00abfa inset;
+    border-radius: 50%;
+    position: relative;
+    animation: l6 1.5s linear infinite;
+  }
+  .loader:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    box-shadow: inherit;
+    width: 25px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+  @keyframes l6 {
+    to {
+      transform: rotate(360deg);
+    }
+
+}
+</style>
+</head>
+<body>
+
+  <h1>Тарифы</h1>
+  <ul id="tariffList"></ul>
+
+  <script>
+    // Функция для получения данных с Spring Boot сервера
+    async function fetchTariffs() {
+      try {
+        const response = await fetch('http://localhost:8080/orbitel/tariffs'); // Запрос к серверу
+        const tariffs = await response.json(); // Преобразование ответа в JSON
+
+        const loaderContainer = document.querySelector('.loader-container');
+        loaderContainer.style.display = 'flex'; // Показываем загрузку
+        // Получаем элемент ul, куда будем добавлять тарифы
+        const tariffList = document.getElementById('tariffList');
+
+        // Проходимся по каждому тарифу и добавляем его в список
+        tariffs.forEach(tariff => {
+          const li = document.createElement('li');
+
+          // Добавляем блок с информацией о тарифе
+          const tariffInfo = document.createElement('div');
+          tariffInfo.className = 'tariff-info';
+          tariffInfo.innerHTML = `
+            <strong>${tariff.tariffName}</strong><br>
+            Цена: ${tariff.pricePerMonth} руб./мес.<br>
+            Скорость: ${tariff.speed} Мбит/с
+          `;
+
+          // Создаём кнопку для подключения тарифа
+          const button = document.createElement('button');
+          button.textContent = 'Подключить тариф';
+
+          // Добавляем обработчик события для кнопки
+          button.addEventListener('click', () => {
+            connectTariff(tariff.tariffId);
+          });
+
+          // Добавляем информацию и кнопку в элемент списка
+          li.appendChild(tariffInfo);
+          li.appendChild(button);
+
+          // Добавляем элемент списка в ul
+          tariffList.appendChild(li);
+        });
+      } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+      }
+    }
+
+    // Функция для обработки подключения тарифа
+    function connectTariff(tariffId) {
+      console.log(`Подключение тарифа с ID: ${tariffId}`);
+      
+      // Здесь можно отправить POST запрос на сервер для подключения тарифа
+      fetch(`http://localhost:8080/api/connectTariff/${tariffId}`, {
+        method: 'POST'
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Тариф успешно подключен!');
+        } else {
+          alert('Ошибка при подключении тарифа.');
+        }
+      })
+      .catch(error => {
+        console.error('Ошибка при подключении тарифа:', error);
+      });
+    }
+
+    // Вызов функции для загрузки тарифов при загрузке страницы
+    fetchTariffs();
+  </script>
+
+</body>
+</html>
